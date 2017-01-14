@@ -81,5 +81,5 @@ def emojipastafy(copypasta):
 
 if __name__ == '__main__':
 	# process copypasta
-	copypasta = open('input.txt').read()
+	copypasta = 'i am on a bus'#open('input.txt').read()
 	print emojipastafy(copypasta)
