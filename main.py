@@ -9,9 +9,7 @@ import string
 # ==============================================================================
 
 def cleanup_word(word):
-	# TODO write
-
-	return word.lower().translate(None, string.punctuation)
+	return word.lower().translate({key: None for key in string.punctuation})
 
 class EmojiMap:
 	keyword_emoji_map = dict()
@@ -66,10 +64,12 @@ def emojipastafy(copypasta):
 		emoji = emoji_map.get_emoji(cleaned_word)
 
 		if emoji is not None:
-			f.write(' ')
-			for i in range(numpy.random.poisson(1)):
-				f.write(emoji.encode('UTF-8'))
-			f.write(' ')
+			count = numpy.random.poisson(1)
+			if count > 0:
+				f.write(' ')
+				for i in range(count):
+					f.write(emoji.encode('UTF-8'))
+				f.write(' ')
 
 		f.write(' ')
 
@@ -81,5 +81,5 @@ def emojipastafy(copypasta):
 
 if __name__ == '__main__':
 	# process copypasta
-	copypasta = 'i am on a bus'#open('input.txt').read()
+	copypasta = unicode(open('input.txt').read())
 	print emojipastafy(copypasta)
