@@ -51,25 +51,30 @@ class EmojiMap:
 # ================================== DRIVER ===================================
 # ==============================================================================
 
-emoji_map = EmojiMap()
+def emojipastafy(copypasta):
+	emoji_map = EmojiMap()
 
-# process copypasta
-copypasta = open('input.txt').read()
-# f = open('output.txt', 'w')
-f = StringIO.StringIO()
+	f = StringIO.StringIO()
 
-for word in copypasta.split():
-	cleaned_word = cleanup_word(word)
+	for word in copypasta.split():
+		cleaned_word = cleanup_word(word)
 
-	f.write(word.encode('UTF-8'))
+		f.write(word.encode('UTF-8'))
 
-	emoji = emoji_map.get_emoji(cleaned_word)
+		emoji = emoji_map.get_emoji(cleaned_word)
 
-	if emoji is not None:
-		f.write(' ' + emoji.encode('UTF-8') + ' ')
+		if emoji is not None:
+			f.write(' ' + emoji.encode('UTF-8') + ' ')
 
-	f.write(' ')
+		f.write(' ')
 
-print f.getvalue()
+	emojipasta = f.getvalue()
 
-f.close()
+	f.close()
+
+	return emojipasta
+
+if __name__ == '__main__':
+	# process copypasta
+	copypasta = open('input.txt').read()
+	print emojipastafy(copypasta)
