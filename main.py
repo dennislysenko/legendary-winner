@@ -16,13 +16,13 @@ class EmojiMap:
 		self.construct_emoji_map()
 
 	def construct_emoji_map(self):
-		emojis_data = open('emojis.json', 'r', encoding='UTF-8').read()
+		emojis_data = open('emojis.json').read()
 		emojis = json.loads(emojis_data)
 
 		# schema:
-		# { "emojikey": { "keywords": [...], "char": <emoji>, "category": "people" }, "emojikey2": { ... } }
+		# "emojikey": { "keywords": [...], "char": <emoji>, "category": "people" }
 
-		for (name, entry) in emojis.items():
+		for (name, entry) in emojis.iteritems():
 			emoji = entry['char']
 			keywords = entry['keywords']
 			for keyword in keywords:
@@ -52,18 +52,18 @@ class EmojiMap:
 emoji_map = EmojiMap()
 
 # process copypasta
-copypasta = open('input.txt', 'r', encoding='utf-8').read()
-f = open('output.txt', 'w', encoding='utf-8')
+copypasta = open('input.txt').read()
+f = open('output.txt', 'w')
 
 for word in copypasta.split():
 	cleaned_word = cleanup_word(word)
 
-	f.write(word)
+	f.write(word.encode('UTF-8'))
 
 	emoji = emoji_map.get_emoji(cleaned_word)
 
 	if emoji is not None:
-		f.write(' ' + emoji + ' ')
+		f.write(' ' + emoji.encode('UTF-8') + ' ')
 
 	f.write(' ')
 
