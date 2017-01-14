@@ -1,6 +1,8 @@
 import json
 import random
 import StringIO
+import numpy
+import string
 
 # ==============================================================================
 # ================================== MODULES ===================================
@@ -64,7 +66,10 @@ def emojipastafy(copypasta):
 		emoji = emoji_map.get_emoji(cleaned_word)
 
 		if emoji is not None:
-			f.write(' ' + emoji.encode('UTF-8') + ' ')
+			f.write(' ')
+			for i in range(numpy.random.poisson(1)):
+				f.write(emoji.encode('UTF-8'))
+			f.write(' ')
 
 		f.write(' ')
 
