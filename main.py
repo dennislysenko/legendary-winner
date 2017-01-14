@@ -1,5 +1,6 @@
 import json
 import random
+import StringIO
 
 # ==============================================================================
 # ================================== MODULES ===================================
@@ -53,7 +54,8 @@ emoji_map = EmojiMap()
 
 # process copypasta
 copypasta = open('input.txt').read()
-f = open('output.txt', 'w')
+# f = open('output.txt', 'w')
+f = StringIO.StringIO()
 
 for word in copypasta.split():
 	cleaned_word = cleanup_word(word)
@@ -66,5 +68,7 @@ for word in copypasta.split():
 		f.write(' ' + emoji.encode('UTF-8') + ' ')
 
 	f.write(' ')
+
+print f.getvalue()
 
 f.close()
