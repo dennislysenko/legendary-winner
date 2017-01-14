@@ -8,7 +8,8 @@ import StringIO
 
 def cleanup_word(word):
 	# TODO write
-	return word
+
+	return word.lower().translate(None, string.punctuation)
 
 class EmojiMap:
 	keyword_emoji_map = dict()
